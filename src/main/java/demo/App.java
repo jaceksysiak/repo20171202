@@ -25,7 +25,7 @@ public class App extends SpringBootServletInitializer {
 	
 	@RequestMapping(value="/")
 	public String demo(){
-		return "Hello ...";
+		return "Hello 20171202...";
 	}
 	
 
