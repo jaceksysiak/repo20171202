@@ -25,12 +25,11 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 		
-	<!--  jeżeli chcemy odpalić z eclipsa  
+	<!--  jeżeli chcemy odpalić z eclipsa -->
 <dependency>
 <groupId>org.apache.tomcat.embed</groupId>
 <artifactId>tomcat-embed-jasper</artifactId>
 </dependency>
--->
  
 		
 		<dependency>
@@ -80,8 +79,6 @@
 	<packaging>war</packaging>
 	
 	<build>
-	<sourceDirectory>src</sourceDirectory>
-	<finalName>ROOT</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
