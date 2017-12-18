@@ -37,6 +37,10 @@ public class StatusUpdate {
 		added = new Date();
 		}
 	}
+	
+	public StatusUpdate(){
+		
+	}
 
 	public StatusUpdate(String text){
 		this.text = text;
@@ -47,6 +51,34 @@ public class StatusUpdate {
 		this.added = added;
 	}
 	
+ 
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getText() {
+		return text;
+	}
+
+	public void setText(String text) {
+		this.text = text;
+	}
+
+	public Date getAdded() {
+		return added;
+	}
+
+	public void setAdded(Date added) {
+		this.added = added;
+	}
+	
+	
+	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -84,29 +116,15 @@ public class StatusUpdate {
 		return true;
 	}
 
-	public Long getId() {
-		return id;
+	@Override
+	public String toString() {
+		return "StatusUpdate [id=" + id + ", text=" + text + ", added=" + added
+				+ "]";
 	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
 
-	public String getText() {
-		return text;
-	}
-
-	public void setText(String text) {
-		this.text = text;
-	}
-
-	public Date getAdded() {
-		return added;
-	}
-
-	public void setAdded(Date added) {
-		this.added = added;
-	}
 
 }
+
+
 
