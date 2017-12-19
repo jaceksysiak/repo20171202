@@ -1,57 +1,53 @@
 package com.caveofprogramming.model;
 
-
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Column;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-
 @Entity
-@Table(name="status_update")
+@Table(name = "status_update")
 public class StatusUpdate {
 
 	@Id
-	@Column(name="id")
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name = "id")
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
-	@Column(name="text")
+
+	@Column(name = "text")
 	private String text;
-	
-	@Column(name="added")
+
+	@Column(name = "added")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date added;
-	
+
 	@PrePersist
-	protected void onCreate(){
-		
-		if(added == null){
-		added = new Date();
+	protected void onCreate() {
+		if (added == null) {
+			added = new Date();
 		}
 	}
 	
-	public StatusUpdate(){
+	public StatusUpdate() {
 		
 	}
 
-	public StatusUpdate(String text){
+	public StatusUpdate(String text) {
 		this.text = text;
 	}
-	
-	public StatusUpdate(String text, Date added){
+
+	public StatusUpdate(String text, Date added) {
 		this.text = text;
 		this.added = added;
 	}
-	
- 
+
 	public Long getId() {
 		return id;
 	}
@@ -75,9 +71,6 @@ public class StatusUpdate {
 	public void setAdded(Date added) {
 		this.added = added;
 	}
-	
-	
-	
 
 	@Override
 	public int hashCode() {
@@ -118,13 +111,9 @@ public class StatusUpdate {
 
 	@Override
 	public String toString() {
-		return "StatusUpdate [id=" + id + ", text=" + text + ", added=" + added
-				+ "]";
+		return "StatusUpdate [id=" + id + ", text=" + text + ", added=" + added + "]";
 	}
-
-
+	
+	
 
 }
-
-
-

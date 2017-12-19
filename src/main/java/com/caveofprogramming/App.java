@@ -22,8 +22,7 @@ public class App extends SpringBootServletInitializer {
 	}
 	
 	@Bean
-	public TilesConfigurer tilesConfigurer(){
-		 
+	public TilesConfigurer tilesConfigurer() {
 		TilesConfigurer tilesConfigurer = new TilesConfigurer();
 		
 		String[] defs = {"/WEB-INF/tiles.xml"};
@@ -34,38 +33,10 @@ public class App extends SpringBootServletInitializer {
 	}
 	
 	@Bean
-	public UrlBasedViewResolver tilesViewResolver(){
-		
+	public UrlBasedViewResolver tilesViewResolver() {
 		UrlBasedViewResolver tilesViewResolver = new UrlBasedViewResolver();
-		
 		tilesViewResolver.setViewClass(TilesView.class);
-		
 		return tilesViewResolver;
 	}
-	 
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
