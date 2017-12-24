@@ -6,7 +6,6 @@
 <div class="row">
 
 	<div class="col-md-8 col-md-offset-2">
-		
 	
 		<div class="panel panel-default">
 		
@@ -16,7 +15,7 @@
 			
 			<div class="panel-body">
 				
-				<form:form commandName="statusUpdate">
+				<form:form modelAttribute="statusUpdate">
 					<div class="form-group">
 						<form:textarea path="text" name="text" rows="10" cols="50"></form:textarea>
 					</div>
@@ -32,7 +31,7 @@
 		<div class="panel panel-default">
 		
 			<div class="panel-heading">
-				<div class="panel-title">Status update added on: <fmt:formatDate pattern="EEEE d MMMM y 'at' H:mm:s" value="${latestStatusUpdate.added}" /></div>
+				<div class="panel-title">Status update added on: <fmt:formatDate pattern="EEEE d MMMM y 'at' H:mm:ss" value="${latestStatusUpdate.added}" /></div>
 			</div>
 			
 			<div class="panel-body">
