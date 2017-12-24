@@ -16,6 +16,11 @@
 			<div class="panel-body">
 				
 				<form:form modelAttribute="statusUpdate">
+				
+				   <div class="errors">
+				   <form:errors path="text" />
+				   </div>
+				      
 					<div class="form-group">
 						<form:textarea path="text" name="text" rows="10" cols="50"></form:textarea>
 					</div>
