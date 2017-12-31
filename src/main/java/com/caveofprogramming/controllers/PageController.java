@@ -3,6 +3,7 @@ package com.caveofprogramming.controllers;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -32,10 +33,9 @@ public class PageController {
 	@RequestMapping(value="/viewstatus", method=RequestMethod.GET)
 	ModelAndView viewStatus(ModelAndView modelAndView, @RequestParam(name="p", defaultValue="1") Integer pageNumber){
 		
-
-		System.out.println();
-		System.out.println("==============" +pageNumber+ "==============");
-		System.out.println();
+		Page<StatusUpdate> page = statusUpdateService.getPage(pageNumber);
+		
+		modelAndView.getModel().put("page", page);
 		
 		modelAndView.setViewName("app.viewStatus");
 		
