@@ -15,6 +15,7 @@
 <c:set var="endPage" value="${(block+1)*size}" />
 <c:set var="endPage" value="${endPage > page.totalPages ? page.totalPages : endPage}" />
 
+<c:if test="${page.totalPages != 1}">
   <div class="pagination">
   
       <c:if test="${block != 0}" >
@@ -46,6 +47,7 @@
   	</c:if>
   	
   </div>
+</c:if>
   
   
   
