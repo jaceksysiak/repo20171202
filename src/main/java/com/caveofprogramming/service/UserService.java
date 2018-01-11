@@ -28,7 +28,6 @@ public class UserService implements UserDetailsService{
 	public void register(SiteUser user){
 		
 		user.setRole("ROLE_USER");
-		user.setPassword(passwordEncoder.encode(user.getPassword()));
 		userDao.save(user);
 		
 	}

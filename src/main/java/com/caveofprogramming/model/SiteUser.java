@@ -6,10 +6,20 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.validation.constraints.Size;
+
+import org.apache.tomcat.util.security.PrivilegedSetTccl;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import com.caveofprogramming.validation.PasswordMatch;
 
 
 @Entity
 @Table(name="users")
+@PasswordMatch(message="{register.repeatpassword.missmatch}")
 public class SiteUser {
 	
 	@Id
@@ -18,10 +28,19 @@ public class SiteUser {
 	private Long id;
 	
 	@Column(name="email", unique=true)
+	@Email(message="{register.email.invalid}")
+	@NotBlank(message="{register.email.invalid}")
 	private String email;
+	
+	@Transient
+	@Size(min=5, max=15, message="{register.password.size}")
+	private String plainPassword;
 	
 	@Column(name="password", length=60)
 	private String password;
+	
+	@Transient
+	private String repeatPassword;
 	
 	@Column(name="role", length=20)
 	private String role;
@@ -56,6 +75,24 @@ public class SiteUser {
 
 	public void setRole(String role) {
 		this.role = role;
+	}
+
+	public String getPlainPassword() {
+		return plainPassword;
+	}
+
+	public void setPlainPassword(String plainPassword) {
+		
+		this.password = new BCryptPasswordEncoder().encode(plainPassword);
+		this.plainPassword = plainPassword;
+	}
+
+	public String getRepeatPassword() {
+		return repeatPassword;
+	}
+
+	public void setRepeatPassword(String repeatPassword) {
+		this.repeatPassword = repeatPassword;
 	}
 	
 
