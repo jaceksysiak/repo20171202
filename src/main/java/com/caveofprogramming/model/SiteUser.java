@@ -9,25 +9,23 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.Size;
 
-import org.apache.tomcat.util.security.PrivilegedSetTccl;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.caveofprogramming.validation.PasswordMatch;
 
-
 @Entity
-@Table(name="users")
-@PasswordMatch(message="{register.repeatpassword.missmatch}")
+@Table(name = "users")
+@PasswordMatch(message="{register.repeatpassword.mismatch}")
 public class SiteUser {
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="id")
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id")
 	private Long id;
-	
-	@Column(name="email", unique=true)
+
+	@Column(name = "email", unique=true)
 	@Email(message="{register.email.invalid}")
 	@NotBlank(message="{register.email.invalid}")
 	private String email;
@@ -35,8 +33,8 @@ public class SiteUser {
 	@Transient
 	@Size(min=5, max=15, message="{register.password.size}")
 	private String plainPassword;
-	
-	@Column(name="password", length=60)
+
+	@Column(name = "password", length=60)
 	private String password;
 	
 	@Transient
@@ -82,7 +80,6 @@ public class SiteUser {
 	}
 
 	public void setPlainPassword(String plainPassword) {
-		
 		this.password = new BCryptPasswordEncoder().encode(plainPassword);
 		this.plainPassword = plainPassword;
 	}
@@ -94,46 +91,6 @@ public class SiteUser {
 	public void setRepeatPassword(String repeatPassword) {
 		this.repeatPassword = repeatPassword;
 	}
+
 	
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
