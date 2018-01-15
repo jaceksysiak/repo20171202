@@ -25,20 +25,22 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		 
 		/*security rules*/
 		http.authorizeRequests()
-			.antMatchers("/", "/about", "/register", "/registrationconfirmed", "/invaliduser", "/expiredtoken")
+			.antMatchers("/", "/about", "/register", "/registrationconfirmed", "/invaliduser", "/expiredtoken", "/verifyemail", "/confirmregister")
 				.permitAll()
 					.antMatchers("/js/**", "/css/**", "/img/**")
 						.permitAll()
 							 .antMatchers("/addstatus", "/editstatus", "/deletestatus", "/viewstatus")
 							    .hasRole("ADMIN")
-									.and()
-										.formLogin()
-											.loginPage("/login")
-												.defaultSuccessUrl("/")
-													.permitAll()
-													.and()
-														.logout()
-															.permitAll();
+							    	.anyRequest()
+							    		.denyAll()
+							    			.and()
+							    				.formLogin()
+							    					.loginPage("/login")
+							    						.defaultSuccessUrl("/")
+							    							.permitAll()
+							    								.and()
+							    									.logout()
+							    										.permitAll();
 	}
 	
 	@Autowired

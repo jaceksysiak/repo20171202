@@ -6,8 +6,10 @@
     
       <div class="col-md-6 col-md-offset-3 col-sm-offset-2 text-center">
       
-      	<c:out value="${message}" />
-      
+      	<div class="message">
+      		<c:out value="${message}" />
+      	</div>
+      		
       </div>
     
     </div>
