@@ -20,8 +20,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.caveofprogramming.exceptions.InvalidFileException;
 import com.caveofprogramming.model.Profile;
 import com.caveofprogramming.model.SiteUser;
+import com.caveofprogramming.service.FileService;
 import com.caveofprogramming.service.ProfileService;
 import com.caveofprogramming.service.UserService;
 
@@ -36,6 +38,9 @@ public class ProfileController {
 	
 	@Autowired
 	private PolicyFactory htmlPolicy;
+	
+	@Autowired
+	FileService fileService;
 	
 	@Value("${photo.upload.directory}")
 	private String photoUploadDirectory;
@@ -109,12 +114,10 @@ public class ProfileController {
 		
 		modelAndView.setViewName("redirect:/profile");
 		
-		Path outputFilePath = Paths.get(photoUploadDirectory, file.getOriginalFilename());
-		
 		try {
-			Files.deleteIfExists(outputFilePath);
-			Files.copy(file.getInputStream(), outputFilePath);
-			
+			fileService.saveImageFile(file, photoUploadDirectory, "photo", "profile");
+		} catch (InvalidFileException e) {
+			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
