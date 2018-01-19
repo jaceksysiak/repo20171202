@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.caveofprogramming.exceptions.InvalidFileException;
+import com.caveofprogramming.model.FileInfo;
 import com.fasterxml.jackson.databind.deser.std.StringArrayDeserializer;
 
 @Service
@@ -63,7 +64,7 @@ public class FileService {
 	}
 	
 	
-	public void saveImageFile(MultipartFile file, String baseDirectory, String subDirPrefix, String filePrefix) throws InvalidFileException, IOException{
+	public FileInfo saveImageFile(MultipartFile file, String baseDirectory, String subDirPrefix, String filePrefix) throws InvalidFileException, IOException{
 		
 		int nFilename = random.nextInt(1000);
 		String filename = String.format("%s%03d", filePrefix, nFilename);
@@ -86,6 +87,8 @@ public class FileService {
 		Files.deleteIfExists(filepath);
 		
 		Files.copy(file.getInputStream(), filepath);
+		
+		return new FileInfo(filename, extension, subDirectory.getName(), baseDirectory);
 	}
 }
 
