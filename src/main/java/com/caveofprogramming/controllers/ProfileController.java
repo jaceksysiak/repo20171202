@@ -15,6 +15,7 @@ import org.owasp.html.PolicyFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -36,6 +37,7 @@ import com.caveofprogramming.model.SiteUser;
 import com.caveofprogramming.service.FileService;
 import com.caveofprogramming.service.ProfileService;
 import com.caveofprogramming.service.UserService;
+import com.caveofprogramming.status.PhotoUploadStatus;
 
 @Controller
 public class ProfileController {
@@ -52,8 +54,21 @@ public class ProfileController {
 	@Autowired
 	FileService fileService;
 	
+	@Value("${photo.upload.ok}")
+	private String photoStatusOK;
+	
+	@Value("${photo.upload.invalid}")
+	private String photoStatusInvalid;
+	
+	@Value("${photo.upload.ioexception}")
+	private String photoStatusIOException;
+	
+	@Value("${photo.upload.toosmall}")
+	private String photoStatusTooSmall;
+	
 	@Value("${photo.upload.directory}")
 	private String photoUploadDirectory;
+	
 	
 	private SiteUser getUser(){
 		
@@ -120,14 +135,15 @@ public class ProfileController {
 	 
 	 
 	@RequestMapping(value="/upload-profile-photo", method=RequestMethod.POST)
-	public ModelAndView handlePhotoUploads(ModelAndView modelAndView, @RequestParam("file") MultipartFile file){
-		
-		modelAndView.setViewName("redirect:/profile");
+	@ResponseBody // Return data in JSON format
+	public ResponseEntity<PhotoUploadStatus> handlePhotoUploads(@RequestParam("file") MultipartFile file){
 		
 		SiteUser user = getUser();
 		Profile profile = profileService.getUserProfile(user);
 		
 		Path oldPhotoPath = profile.getPhoto(photoUploadDirectory);
+		
+		PhotoUploadStatus status = new PhotoUploadStatus(photoStatusOK);
 		   
 		try {
 			FileInfo photoInfo = fileService.saveImageFile(file, photoUploadDirectory, "photos", "p"+user.getId(), 100, 100);
@@ -142,20 +158,22 @@ public class ProfileController {
 			}
 			
 		} catch (InvalidFileException e) {
-			
+			status.setMessage(photoStatusInvalid);
 			e.printStackTrace();
 			
 		} catch (IOException e) {
-			
+			status.setMessage(photoStatusIOException);
 			e.printStackTrace();
 			
 		} catch (ImageTooSmallException e) {
-
+			status.setMessage(photoStatusTooSmall);
 			e.printStackTrace();
 		}
 		
-		return modelAndView;
+		return new ResponseEntity(status, HttpStatus.OK);
 	}
+	
+	
 	
 	@RequestMapping(value="/profilephoto", method=RequestMethod.GET)
 	@ResponseBody
