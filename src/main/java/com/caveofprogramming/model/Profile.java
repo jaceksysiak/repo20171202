@@ -35,7 +35,7 @@ public class Profile {
 	@Column(name="photo_directory", length=10)
 	private String photoDirectory;
 	
-	@Column(name="photo_name", length=10)
+	@Column(name="photo_name", length=50)
 	private String photoName;
 	
 	@Column(name="photo_extension", length=5)

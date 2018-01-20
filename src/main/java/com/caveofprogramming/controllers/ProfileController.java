@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.caveofprogramming.exceptions.ImageTooSmallException;
 import com.caveofprogramming.exceptions.InvalidFileException;
 import com.caveofprogramming.model.FileInfo;
 import com.caveofprogramming.model.Profile;
@@ -126,17 +127,30 @@ public class ProfileController {
 		SiteUser user = getUser();
 		Profile profile = profileService.getUserProfile(user);
 		
+		Path oldPhotoPath = profile.getPhoto(photoUploadDirectory);
+		   
 		try {
-			FileInfo photoInfo = fileService.saveImageFile(file, photoUploadDirectory, "photo", "profile");
+			FileInfo photoInfo = fileService.saveImageFile(file, photoUploadDirectory, "photos", "p"+user.getId(), 100, 100);
 			
 			profile.setPhotoDetails(photoInfo);
 			profileService.save(profile);
 			
 			System.out.println(photoInfo);
 			
+			if(oldPhotoPath != null){
+			Files.delete(oldPhotoPath);
+			}
+			
 		} catch (InvalidFileException e) {
+			
 			e.printStackTrace();
+			
 		} catch (IOException e) {
+			
+			e.printStackTrace();
+			
+		} catch (ImageTooSmallException e) {
+
 			e.printStackTrace();
 		}
 		
