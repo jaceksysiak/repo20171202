@@ -87,6 +87,11 @@ public class UserService implements UserDetailsService{
 		return userDao.findByEmail(email);
 	}
 
+	public SiteUser get(Long id) {
+
+		return userDao.findOne(id);
+	}
+
 }
 
 
