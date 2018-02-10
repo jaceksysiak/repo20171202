@@ -63,36 +63,36 @@ textarea {
 }
 
 .edit-links {
-   margin-top: 10px;	
+	margin-top: 10px;
 }
 
 .login-form {
-	width: 100%;	
+	width: 100%;
 }
 
 .login-form > div {
 	width: 100%;
 	margin-top: 10px;
 	margin-bottom: 10px;
-	}
-	
-	.login-form > div > button {
-	  background-color: blue;
-	  color: white;
-	  font-weight: bold;
-	  border-color: darkblue;
-	}
-	
-.login-error{
+}
+
+.login-form > div > button {
+	background-color: blue;
+	color: white;
+	font-weight: bold;
+	border-color: darkblue;
+}
+
+.login-error {
 	margin-top: 10px;
 	margin-bottom: 10px;
 	color: red;
-	font-weight: bold;	
+	font-weight: bold;
 }
 
 .message {
 	font-size: larger;
-	margin-top: 50px;	
+	margin-top: 50px;
 }
 
 .profile-about {
@@ -123,14 +123,47 @@ textarea {
 	top: 5px;
 	left: 30px;
 	font-weight: bold;
-	color: green;	
+	color: green;
 }
 
 #photoUploadForm {
+	display:none;
+}
+
+ul#interestList {
+	border: 1px solid gray;
+}
+
+ul.tagit > li.tagit-choice {
+	background-color: orange;
+	color: white;
+	font-weight: bold;
+	border-radius: 10px;
+	box-shadow: 2px 2px 2px #888888;
+}
+
+ul#interestList a.tagit-close > span.text-icon {
+	display: inline;
+	color: yellow;
+	padding: 6px;
+	font-size: 1.1em;
+}
+
+ul#interestList a.tagit-close:hover {
+	text-decoration: none;
+}
+
+ul#interestList a.tagit-close:hover > span.text-icon {
+	color: blue;
+}
+
+div[role=status] {
 	display: none;
 }
 
-
+#ui-id-1 {
+	display: none !important;
+}
 
 
 
