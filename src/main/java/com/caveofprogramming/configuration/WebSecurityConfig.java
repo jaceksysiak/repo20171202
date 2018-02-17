@@ -25,10 +25,29 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		 
 		/*security rules*/
 		http.authorizeRequests()
-			.antMatchers("/", "/search", "/about", "/register", "/registrationconfirmed", "/invaliduser", "/expiredtoken", "/verifyemail", "/confirmregister").permitAll()
-					.antMatchers("/js/**", "/css/**", "/img/**").permitAll()
-							 .antMatchers("/addstatus", "/editstatus", "/deletestatus", "/viewstatus").hasRole("ADMIN")
-							    	.antMatchers("/profile", "/profile/*", "/edit-profile-about", "/upload-profile-photo", "/profilephoto", "/profilephoto/*", "/save-interest", "/delete-interest").authenticated()
+			.antMatchers("/", 
+					     "/search", 
+					     "/about", 
+					     "/register", 
+					     "/registrationconfirmed", 
+					     "/invaliduser", 
+					     "/expiredtoken", 
+					     "/verifyemail", 
+					     "/confirmregister",
+					     "/profilephoto/*").permitAll()
+					.antMatchers("/js/**", 
+							     "/css/**", 
+							     "/img/**").permitAll()
+							 .antMatchers("/addstatus", 
+									 	  "/editstatus", 
+									 	  "/deletestatus", 
+									 	  "/viewstatus").hasRole("ADMIN")
+							    	.antMatchers("/profile", 
+							    				 "/profile/*", 
+							    				 "/edit-profile-about", 
+							    				 "/upload-profile-photo", 
+							    				 "/save-interest", 
+							    				 "/delete-interest").authenticated()
 							    		.anyRequest()
 							    		.denyAll()
 							    			.and()
