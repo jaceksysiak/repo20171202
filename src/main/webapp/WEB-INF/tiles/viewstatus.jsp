@@ -8,7 +8,7 @@
 <div class="row">
   <div class="col-md-8 col-md-offset-2">
   
-       <jwp:pagination url="${url}"  page="${page}" size="10"/>
+       <jwp:pagination url="${url}"  page="${page}" size="3"/>
 	
 <c:forEach var="statusUpdate" items="${page.content}">
 
